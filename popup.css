@@ -1,0 +1,260 @@
+/* popup.css - minimal, teenage engineering inspired UI with red accent */
+:root {
+  --te-red: #ff0000;
+  /* pure red accent */
+  --te-red-soft: #ff3333;
+  /* softer red for hover states */
+  --te-red-bg: #fff5f5;
+  /* very light red background */
+  --te-gray: #f8f9fa;
+  /* light gray background */
+  --te-gray-dark: #6c757d;
+  /* dark gray text */
+  --te-border: #e9ecef;
+  /* light border */
+  --te-white: #ffffff;
+  --te-black: #212529;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+}
+
+body {
+  background: var(--te-gray) !important;
+}
+
+/* Logo dot with red accent */
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--te-red);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+/* Icon buttons */
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--te-border);
+  background: var(--te-white);
+  color: var(--te-gray-dark);
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-icon:hover {
+  background: var(--te-gray);
+  border-color: var(--te-red);
+  color: var(--te-red);
+}
+
+.btn-icon.btn-primary {
+  background: var(--te-red);
+  border-color: var(--te-red);
+  color: var(--te-white);
+}
+
+.btn-icon.btn-primary:hover {
+  background: var(--te-red-soft);
+  border-color: var(--te-red-soft);
+}
+
+.btn-icon.btn-danger {
+  background: var(--te-red-bg);
+  border-color: var(--te-red);
+  color: var(--te-red);
+}
+
+.btn-icon.btn-danger:hover {
+  background: var(--te-red);
+  color: var(--te-white);
+}
+
+/* Cards */
+.card {
+  border: 1px solid var(--te-border);
+  border-radius: 8px;
+  background: var(--te-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* List items */
+.list-group-item {
+  border: 0;
+  border-bottom: 1px solid var(--te-border);
+  padding: 12px 16px;
+  background: var(--te-white);
+  transition: background-color 0.15s ease;
+}
+
+.list-group-item:hover {
+  background: var(--te-gray);
+}
+
+.list-group-item:last-child {
+  border-bottom: 0;
+}
+
+/* Status badge */
+.badge.text-bg-secondary {
+  background: var(--te-gray) !important;
+  color: var(--te-gray-dark) !important;
+  border: 1px solid var(--te-border);
+  font-weight: 500;
+}
+
+.badge.text-bg-success {
+  background: var(--te-red-bg) !important;
+  color: var(--te-red) !important;
+  border: 1px solid var(--te-red);
+}
+
+.badge.text-bg-danger {
+  background: var(--te-red) !important;
+  color: var(--te-white) !important;
+  border: 1px solid var(--te-red);
+}
+
+/* Typography */
+.small-mono {
+  font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+}
+
+/* Form controls */
+.form-control,
+.form-select {
+  border: 1px solid var(--te-border);
+  border-radius: 6px;
+  background: var(--te-white);
+  box-shadow: none !important;
+  font-size: 13px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--te-red);
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1) !important;
+}
+
+/* Message cards */
+.message-card {
+  border: 1px solid var(--te-border);
+  border-radius: 8px;
+  background: var(--te-white);
+  margin-bottom: 8px;
+}
+
+.message-card .card-header {
+  padding: 8px 12px;
+  background: var(--te-gray);
+  border-bottom: 1px solid var(--te-border);
+  border-radius: 8px 8px 0 0;
+}
+
+.message-card .card-body {
+  padding: 12px;
+}
+
+/* Role pills */
+.role-pill {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--te-border);
+  background: var(--te-white);
+}
+
+.role-pill.user {
+  border-color: var(--te-red);
+  color: var(--te-red);
+  background: var(--te-red-bg);
+}
+
+.role-pill.assistant {
+  border-color: var(--te-gray-dark);
+  color: var(--te-gray-dark);
+  background: var(--te-gray);
+}
+
+.role-pill.system {
+  border-color: var(--te-red);
+  color: var(--te-red);
+  background: var(--te-red-bg);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 6px;
+  border: 1px solid var(--te-border);
+  font-size: 13px;
+}
+
+.alert-success {
+  background: var(--te-red-bg);
+  border-color: var(--te-red);
+  color: var(--te-red);
+}
+
+.alert-danger {
+  background: var(--te-red);
+  border-color: var(--te-red);
+  color: var(--te-white);
+}
+
+.alert-warning {
+  background: #fff8e1;
+  border-color: #ffb74d;
+  color: #e65100;
+}
+
+.alert-info {
+  background: var(--te-gray);
+  border-color: var(--te-border);
+  color: var(--te-gray-dark);
+}
+
+/* Container adjustments */
+#app {
+  min-width: 360px;
+  width: 100%;
+  max-width: none;
+}
+
+/* Form labels */
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--te-gray-dark);
+  margin-bottom: 4px;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--te-black);
+  font-weight: 600;
+}
+
+/* Text colors */
+.text-muted {
+  color: var(--te-gray-dark) !important;
+}

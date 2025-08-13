@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Duck Duck Guts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Local Bootstrap 5 -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css" />
+
+  <!-- Local fonts -->
+  <link href="inter-font.css" rel="stylesheet">
+</head>
+
+<body class="bg-body-tertiary">
+  <div id="app" class="container py-3" style="min-width: 360px;">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="logo-dot"></div>
+        <h1 class="h5 m-0 fw-bold">Duck Duck Guts</h1>
+      </div>
+      <span id="statusBadge" class="badge text-bg-secondary">Idle</span>
+    </div>
+
+    <div id="alerts"></div>
+
+    <!-- List View -->
+    <div id="listView" class="vstack gap-3">
+      <div class="d-flex flex-wrap gap-2">
+        <button id="btnRefresh" class="btn btn-icon" title="Refresh">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+            <path d="M3 21v-5h5" />
+          </svg>
+        </button>
+        <button id="btnAddChat" class="btn btn-icon btn-primary" title="Insert New Chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14" />
+            <path d="M5 12h14" />
+          </svg>
+        </button>
+        <button id="btnExport" class="btn btn-icon" title="Export JSON">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7,10 12,15 17,10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </button>
+        <a id="openDDG" class="btn btn-icon" href="https://duckduckgo.com/?q=ai" target="_blank"
+          rel="noopener noreferrer" title="Open DuckDuckGo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15,3 21,3 21,9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      </div>
+
+      <div id="noData" class="text-muted small d-none">
+        No savedAIChats found on duckduckgo.com. You can create a new chat here and Save—it will create the data on the
+        site.
+      </div>
+
+      <div id="chatList" class="list-group shadow-sm rounded overflow-hidden"></div>
+    </div>
+
+    <!-- Editor View -->
+    <div id="editorView" class="d-none">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <button id="btnBack" class="btn btn-sm btn-icon" title="Back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div class="d-flex gap-2">
+          <button id="btnSaveChat" class="btn btn-sm btn-icon btn-primary" title="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20,6 9,17 4,12" />
+            </svg>
+          </button>
+          <button id="btnDeleteChat" class="btn btn-sm btn-icon btn-danger" title="Delete Chat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3,6 5,6 21,6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-12">
+              <label class="form-label">Title</label>
+              <input type="text" id="editTitle" class="form-control" placeholder="Chat title" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Chat ID</label>
+              <input type="text" id="editChatId" class="form-control" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Model</label>
+              <input type="text" id="editModel" class="form-control" placeholder="e.g., gpt-4o-mini" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Last Edit</label>
+              <input type="datetime-local" id="editLastEdit" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h6 class="m-0">Messages</h6>
+        <div class="d-flex gap-2">
+          <button id="btnAddUserMsg" class="btn btn-sm btn-icon" title="Add User Message">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+              <path d="M12 14v7" />
+              <path d="M8.5 17.5h7" />
+            </svg>
+          </button>
+          <button id="btnAddAssistantMsg" class="btn btn-sm btn-icon" title="Add Assistant Message">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="10" rx="2" ry="2" />
+              <circle cx="12" cy="5" r="2" />
+              <path d="M12 7v4" />
+              <path d="M8 16h8" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="messagesContainer" class="vstack gap-2 mb-3"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
