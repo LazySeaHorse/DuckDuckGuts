@@ -4,6 +4,9 @@ A Chrome extension to view, edit, insert, delete, and export DuckDuckGo AI (duck
 
 Not affiliated with DuckDuckGo. All data stays on your device.
 
+> [!NOTE]
+> Coded to life with help from GPT-5
+
 [![hujidrgzesrdfz.png](https://i.postimg.cc/GmkCC1nr/hujidrgzesrdfz.png)](https://postimg.cc/pmX7f4d1)
 
 ## Features
