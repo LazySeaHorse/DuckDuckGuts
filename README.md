@@ -4,6 +4,8 @@ A Chrome extension to view, edit, insert, delete, and export DuckDuckGo AI (duck
 
 Not affiliated with DuckDuckGo. All data stays on your device.
 
+[![hujidrgzesrdfz.png](https://i.postimg.cc/GmkCC1nr/hujidrgzesrdfz.png)](https://postimg.cc/pmX7f4d1)
+
 ## Features
 
 - View all DuckDuckGo AI chats (reads localStorage key savedAIChats on duckduckgo.com)
